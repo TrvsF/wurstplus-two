@@ -1,0 +1,127 @@
+buildscript {
+	repositories {
+		jcenter()
+
+		maven {
+			name = "SpongePowered"
+			url  = "http://repo.spongepowered.org/maven"
+		}
+
+		maven {
+			url = "http://files.minecraftforge.net/maven"
+		}
+	}
+
+	dependencies {
+		classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
+		classpath "com.github.jengelman.gradle.plugins:shadow:1.2.3"
+		classpath "org.spongepowered:mixingradle:0.4-SNAPSHOT"
+		}
+	}
+
+
+apply plugin: "net.minecraftforge.gradle.forge";
+apply plugin: "com.github.johnrengelman.shadow";
+apply plugin: "org.spongepowered.mixin"
+
+version          project.client_version
+group            project.client_group
+
+minecraft {
+	version  = "1.12.2-14.23.0.2531"
+	runDir   = "run"
+	coreMod  = "me.travis.wurstplus.mixins.WurstplusMixinLoader"
+	mappings = "snapshot_20180814"
+	makeObfSourceJar = true
+}
+
+repositories {
+	maven {
+		name = "spongepowered-repo"
+		url  = "http://repo.spongepowered.org/maven/"
+	}
+
+	maven {
+		name = "swt-repo"
+		url  = "http://maven-eclipse.github.io/maven"
+	}
+
+	maven {
+		name = "jitpack.io"
+		url  = "https://jitpack.io"
+	}
+
+	mavenCentral()
+}
+
+dependencies {
+	compile "com.github.ionar2:Alpine:1.9f"
+
+	compile group : "net.jodah", name : "typetools",   version: "0.5.0"
+	compile group: "com.googlecode.json-simple", name: "json-simple", version: "1.1.1"
+
+	compile("org.spongepowered:mixin:0.7.4-SNAPSHOT") {
+		exclude module: "launchwrapper"
+		exclude module: "commons-io"
+		exclude module: "guava"
+		exclude module: "gson"
+	}
+	
+	// compile 'com.github.Vatuu:discord-rpc:1.5.0'
+}
+
+shadowJar {
+	dependencies {
+		// include(dependency('com.github.Vatuu:discord-rpc'))
+		include(dependency('com.github.ionar2:Alpine'))
+		include(dependency("org.javassist:javassist"))
+		include(dependency("org.spongepowered:mixin"))
+		include(dependency("net.jodah:typetools"))
+		include(dependency('com.googlecode.json-simple:json-simple:1.1.1'))
+	}
+}
+
+mixin {
+	defaultObfuscationEnv searge
+	add sourceSets.main, "mixins.wurstplus.refmap.json"
+}
+
+reobf {
+	shadowJar {
+		mappingType = 'SEARGE'
+		classpath   = sourceSets.main.compileClasspath
+	}
+}
+
+processResources {
+	inputs.property "version",   project.version
+	inputs.property "mcversion", project.minecraft.version
+
+	from (sourceSets.main.resources.srcDirs) {
+		include "mcmod.info"
+
+		expand "version" : project.version, "mcversion" : project.minecraft.version
+	}
+
+	from (sourceSets.main.resources.srcDirs) {
+		exclude "mcmod.info"
+	}
+
+	rename "(.+_at.cfg)", 'META-INF/$1';
+}
+
+jar {
+	manifest {
+		attributes (
+			"FMLCorePluginContainsFMLMod" : "true",
+			"ForceLoadAsMod"              : "true",
+			"FMLCorePlugin"               : "me.travis.wurstplus.mixins.WurstplusMixinLoader",
+			"MixinConfigs"                : "mixins.wurstplus.json",
+			"tweakClass"                  : "org.spongepowered.asm.launch.MixinTweaker",
+			"TweakOrder"                  : 0,
+			"FMLAT"                       : "wurstplus_at.cfg"
+		)
+	}
+}
+
+build.dependsOn(shadowJar)

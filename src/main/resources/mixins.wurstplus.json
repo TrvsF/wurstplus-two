@@ -1,0 +1,23 @@
+{
+	"required"           : true,
+	"compatibilityLevel" : "JAVA_8",
+	"package"            : "me.travis.wurstplus.mixins",
+	"refmap"             : "mixins.wurstplus.refmap.json",
+	"mixins"             : [
+		"WurstplusMixinPlayerControllerMP",
+		"WurstplusMixinNetworkManager",
+		"WurstplusMixinMinecraft",
+		"WurstplusMixinEntitySP",
+		"WurstplusMixinEntity",
+		"WurstplusMixinGuiNewChat",
+		"WurstplusMixinGuiScreen",
+		"WurstplusMixinEntityRenderer",
+		"WurstplusMixinWorld",
+		"WurstplusMixinRenderPlayer",
+		"WurstplusMixinPlayer",
+		"WurstplusMixinItemRenderer",
+		"WurstplusMixinGuiPlayerTabOverlay",
+		"WurstplusMixinRenderLivingBase",
+		"WurstplusMixinAbstractClientPlayer"
+	]
+}

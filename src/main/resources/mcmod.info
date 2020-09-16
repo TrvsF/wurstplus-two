@@ -1,0 +1,15 @@
+[{
+	"modid"        : "wurstplus",
+	"name"         : "Wurst+2",
+	"description"  : "Wurst+2? more like epic!",
+	"version"      : "1.0",
+	"mcversion"    : "1.12.2-14.23.5.2772",
+	"url"          : "https://wurst.plus",
+	"updateUrl"    : "https://wurst.plus",
+	"authorList"   : ["travis"],
+	"credits"      : "travis",
+	"logoFile"     : "wurstplus.png",
+	"screenshots"  : [],
+	"dependencies" : []
+
+}]
