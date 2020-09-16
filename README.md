@@ -7,6 +7,7 @@ if you want a specific hack made either ask or make it yourself ;) <br>
 join the discord here : https://discord.gg/xF9bX4n
 
 ### how to use
+DOWNLOAD THE JAR FROM THE RELEASES TAB ON THE RIGHT OF YOUR SCREEN <br>
 'r-shift' is the default key for the gui and '.' is the default prefix, both can be changed either with commands or in the config file 
 
 <details>
