@@ -26,7 +26,7 @@ public class WurstplusTracers extends WurstplusHack {
     WurstplusSetting friends = create("Friends", "TracerFriends", false);
     WurstplusSetting range = create("Range", "TracerRange", 50, 0, 250);
     WurstplusSetting width = create("Width", "TracerWidth", 1.0f, 0.0f, 5.0f);
-    WurstplusSetting offset = create("Offset", "TracerOffset", 4.0f, -4.0f, 4.0f);
+    WurstplusSetting offset = create("Offset", "TracerOffset", 0f, -4.0f, 4.0f);
 
     @Override
     public void render(WurstplusEventRender event) {

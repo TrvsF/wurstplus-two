@@ -51,7 +51,7 @@ public class WurstplusNameTags extends WurstplusHack {
     WurstplusSetting r = create("R", "NametagR", 255, 0, 255);
     WurstplusSetting g = create("G", "NametagG", 255, 0, 255);
     WurstplusSetting b = create("B", "NametagB", 255, 0, 255);
-    WurstplusSetting a = create("A", "NametagA", 0.7, 0, 1);
+    WurstplusSetting a = create("A", "NametagA", 0.7f, 0f, 1f);
     WurstplusSetting rainbow_mode = create("Rainbow", "NametagRainbow", false);
     WurstplusSetting sat = create("Saturation", "NametagSatiation", 0.8, 0, 1);
     WurstplusSetting brightness = create("Brightness", "NametagBrightness", 0.8, 0, 1);
@@ -139,7 +139,7 @@ public class WurstplusNameTags extends WurstplusHack {
             green = 40;
             blue = 7;
         }
-        WurstplusRenderUtil.drawRect((float)(-width - 2)-1, (float)(-(mc.fontRenderer.FONT_HEIGHT + 1))-1, width + 3f, 2.5f, red, green, blue, a.get_value(1));
+        WurstplusRenderUtil.drawRect((float)(-width - 2)-1, (float)(-(mc.fontRenderer.FONT_HEIGHT + 1))-1, width + 3f, 2.5f, red, green, blue, (float) a.get_value(1));
         WurstplusRenderUtil.drawRect((float)(-width - 2), (float)(-(mc.fontRenderer.FONT_HEIGHT + 1)), width + 2.0f, 1.5f, 1426063360);
         GlStateManager.disableBlend();
         final ItemStack renderMainHand = player.getHeldItemMainhand().copy();

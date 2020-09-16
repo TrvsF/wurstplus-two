@@ -104,7 +104,7 @@ public class WurstplusAutoCrystal extends WurstplusHack {
 
     WurstplusSetting render_damage = create("Render Damage", "RenderDamage", true);
 
-    WurstplusSetting attempt_chain = create("Chain Mode", "CaChainMode", false);
+    // WurstplusSetting attempt_chain = create("Chain Mode", "CaChainMode", false);
     WurstplusSetting chain_length = create("Chain Length", "CaChainLength", 3, 1, 6);
 
     private final ConcurrentHashMap<EntityEnderCrystal, Integer> attacked_crystals = new ConcurrentHashMap<>();
@@ -408,10 +408,10 @@ public class WurstplusAutoCrystal extends WurstplusHack {
 
                 if (self_damage > maximum_damage_self || (anti_suicide.get_value(true) && (mc.player.getHealth() + mc.player.getAbsorptionAmount()) - self_damage <= 0.5)) continue;
 
-                if (attempt_chain.get_value(true) && chain_step > 0) {
+                /** if (attempt_chain.get_value(true) && chain_step > 0) {
                     damage_blocks.add(new WurstplusPair<>(best_damage, best_block));
                     autoez_target = target;
-                } else if (target_damage > best_damage) {
+                } else**/ if (target_damage > best_damage) {
                     best_damage = target_damage;
                     best_block = block;
                     autoez_target = target;
@@ -434,17 +434,17 @@ public class WurstplusAutoCrystal extends WurstplusHack {
 
         damage_blocks = sort_best_blocks(damage_blocks);
 
-        if (!attempt_chain.get_value(true)) {
+        //if (!attempt_chain.get_value(true)) {
             return best_block;
-        } else {
-            if (damage_blocks.size() == 0) {
-                return null;
-            }
-            if (damage_blocks.size() < current_chain_index) {
-                return damage_blocks.get(0).getValue();
-            }
-            return damage_blocks.get(current_chain_index).getValue();
-        }
+//        } else {
+//            if (damage_blocks.size() == 0) {
+//                return null;
+//            }
+//            if (damage_blocks.size() < current_chain_index) {
+//                return damage_blocks.get(0).getValue();
+//            }
+//            return damage_blocks.get(current_chain_index).getValue();
+//        }
 
     }
 
