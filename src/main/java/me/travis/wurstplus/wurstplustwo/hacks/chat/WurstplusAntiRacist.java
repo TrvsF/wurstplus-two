@@ -69,10 +69,7 @@ public class WurstplusAntiRacist extends WurstplusHack {
 
 
     CharSequence nigger = "nigger";
-    String hardR = nigger.toString();
-
     CharSequence nigga = "nigga";
-    String normal = nigga.toString();
 
     @Override
     public void update() {
@@ -86,7 +83,7 @@ public class WurstplusAntiRacist extends WurstplusHack {
             String s = chants.get(r.nextInt(chants.size()));
             String name = get_random_name();
 
-            if (name == mc.player.getName()) return;
+            if (name.equals(mc.player.getName())) return;
 
             mc.player.sendChatMessage(s.replace("<player>", name));
             tick_delay = 0;
@@ -105,8 +102,9 @@ public class WurstplusAntiRacist extends WurstplusHack {
         return list[r.nextInt(list.length)];
     }
 
-    //Anti n-word
-   @EventHandler
+    // Anti n-word
+
+    @EventHandler
     private Listener<WurstplusEventPacket.SendPacket> listener = new Listener<>(event -> {
 
         if (!(event.get_packet() instanceof CPacketChatMessage)) {
@@ -115,29 +113,18 @@ public class WurstplusAntiRacist extends WurstplusHack {
 
         if(anti_nword.get_value(true)) {
 
-            String message = ((CPacketChatMessage) event.get_packet()).getMessage().toString().toLowerCase();
-
-            String x = Integer.toString((int) (mc.player.posX));
-            String z = Integer.toString((int) (mc.player.posZ));
-
-            String coords = x + " " + z;
+            String message = ((CPacketChatMessage) event.get_packet()).getMessage().toLowerCase();
 
             if (message.contains(nigger) || message.contains(nigga)) {
 
-                StringBuilder correction = new StringBuilder();
-                correction.append((random_string(random_correction)));
+                String x = Integer.toString((int) (mc.player.posX));
+                String z = Integer.toString((int) (mc.player.posZ));
 
-                message = correction.toString();
+                String coords = x + " " + z;
 
-                StringBuilder coordsPost = new StringBuilder();
-                coordsPost.append(coords);
+                message = (random_string(random_correction));
+                mc.player.connection.sendPacket(new CPacketChatMessage("Hi, im at " + coords + ", come teach me a lesson about racism"));
 
-                if (anti_nword.get_value(true)) {
-                    mc.player.connection.sendPacket(new CPacketChatMessage("Hi, im at " + coordsPost.toString() + ", come teach me a lesson about racism"));
-                }
-            } else {
-                StringBuilder nvm = new StringBuilder();
-                nvm.append((message));
             }
 
             ((CPacketChatMessage) event.get_packet()).message = message;

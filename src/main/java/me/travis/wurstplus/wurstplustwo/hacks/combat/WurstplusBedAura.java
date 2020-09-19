@@ -70,10 +70,10 @@ public class WurstplusBedAura extends WurstplusHack {
 
     public void refill_bed() {
         if (!(mc.currentScreen instanceof GuiContainer)) {
-            if (mc.player.inventory.getCurrentItem().getItem() == Items.AIR) {
+            if (is_space()) {
                 for (int i = 9; i < 35; ++i) {
                     if (mc.player.inventory.getStackInSlot(i).getItem() == Items.BED) {
-                        mc.playerController.windowClick(mc.player.inventoryContainer.windowId, i, 0, ClickType.SWAP, mc.player);
+                        mc.playerController.windowClick(mc.player.inventoryContainer.windowId, i, 0, ClickType.QUICK_MOVE, mc.player);
                         break;
                     }
                 }
@@ -81,11 +81,18 @@ public class WurstplusBedAura extends WurstplusHack {
         }
     }
 
+    private boolean is_space() {
+        for (int i = 0; i < 9; i++) {
+            if (mc.player.inventoryContainer.getSlot(i).getHasStack()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void place_bed() {
 
         if (find_bed() == -1) {
-            WurstplusMessageUtil.send_client_error_message("CANNOT FIND BEDS");
-            this.set_disable();
             return;
         }
 
@@ -126,8 +133,6 @@ public class WurstplusBedAura extends WurstplusHack {
         }
 
         if (best_target == null) {
-            WurstplusMessageUtil.send_client_message("cant find best player");
-            this.set_disable();
             return;
         }
 
