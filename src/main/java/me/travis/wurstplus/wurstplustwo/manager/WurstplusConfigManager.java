@@ -221,48 +221,51 @@ public class WurstplusConfigManager {
             final List<String> bugged_lines = new ArrayList<>();
 
             String line;
-            while((line = br.readLine()) != null) {
-
-                final String colune = line.trim();
-                final String tag = colune.split(":")[0];
-                final String value = colune.split(":")[1];
-
-                WurstplusSetting setting = Wurstplus.get_setting_manager().get_setting_with_tag(hack, tag);
-
-                // send_minecraft_log("Attempting to assign value '" + value + "' to setting '" + tag + "'");
+            while ((line = br.readLine()) != null) {
 
                 try {
-                    switch (setting.get_type()) {
-                        case "button":
-                            setting.set_value(Boolean.parseBoolean(value));
-                            break;
-                        case "label":
-                            setting.set_value(value);
-                            break;
-                        case "doubleslider":
-                            setting.set_value(Double.parseDouble(value));
-                            break;
-                        case "integerslider":
-                            setting.set_value(Integer.parseInt(value));
-                            break;
-                        case "combobox":
-                            setting.set_current_value(value);
-                            break;
+                    final String colune = line.trim();
+                    final String tag = colune.split(":")[0];
+                    final String value = colune.split(":")[1];
+
+                    WurstplusSetting setting = Wurstplus.get_setting_manager().get_setting_with_tag(hack, tag);
+
+                    // send_minecraft_log("Attempting to assign value '" + value + "' to setting '" + tag + "'");
+
+                    try {
+                        switch (setting.get_type()) {
+                            case "button":
+                                setting.set_value(Boolean.parseBoolean(value));
+                                break;
+                            case "label":
+                                setting.set_value(value);
+                                break;
+                            case "doubleslider":
+                                setting.set_value(Double.parseDouble(value));
+                                break;
+                            case "integerslider":
+                                setting.set_value(Integer.parseInt(value));
+                                break;
+                            case "combobox":
+                                setting.set_current_value(value);
+                                break;
+                        }
+                    } catch (Exception e) {
+                        // TODO : FIX BUGGED LINE
+                        bugged_lines.add(colune);
+                        send_minecraft_log("Error loading '" + value + "' to setting '" + tag + "'");
+                        break;
                     }
-                } catch (Exception e) {
-                    bugged_lines.add(colune);
-                    send_minecraft_log("Error loading '" + value + "' to setting '" + tag + "'");
-                    break;
-                }
+
+
+                } catch (Exception ignored) {
+                } // TODO : figure out what causes this
 
             }
 
             br.close();
 
-            // TODO : FIX BUGGED LINE
-
         }
-
     }
 
     // LOAD & SAVE client/gui
