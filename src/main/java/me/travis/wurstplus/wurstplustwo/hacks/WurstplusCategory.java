@@ -14,7 +14,9 @@ public enum WurstplusCategory {
 	String name;
 	String tag;
 	boolean hidden;
-
+	
+	hidden = x; // TODO: DELETE THIS LINE LATER. It is intentionally broken so i can test the gradle workflow
+	
 	WurstplusCategory(String name, String tag, boolean hidden) {
 		this.name   = name;
 		this.tag    = tag;
