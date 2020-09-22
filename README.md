@@ -4,7 +4,7 @@
 made public for reasons below, updates will be pushed straight to this repo, if you'd like to help feel free to make a pull request :) <br>
 also please note im not a professional programmer, i only did this for fun, so code here gets rather messy at times, over the next few weeks/months/whatever im going to attempt to clean it up and rewrite any remaining pasted code (mainly the GUI) <br>
 if you want a specific hack made either ask or make it yourself ;) <br>
-join the discord here : https://discord.gg/xF9bX4n
+join the discord here : nvm discord got nuked
 
 ### how to use
 DOWNLOAD THE JAR FROM THE RELEASES TAB ON THE RIGHT OF YOUR SCREEN <br>
