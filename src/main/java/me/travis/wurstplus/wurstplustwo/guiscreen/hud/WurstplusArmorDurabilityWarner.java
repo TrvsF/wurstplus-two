@@ -35,7 +35,7 @@ public class WurstplusArmorDurabilityWarner extends WurstplusPinnable { // STILL
             double dam_left = stack.getMaxDamage() - stack.getItemDamage();
             double percent = (dam_left / max_dam) * 100;
 
-            if (percent <  30) {
+            if (percent < 30) {
                 return true;
             }
         }
