@@ -217,16 +217,18 @@ public class WurstplusHoleESP extends WurstplusHack {
 						holes.add(new WurstplusPair<BlockPos, Boolean>(pos, true));
 						if (low_ceiling_hole) holes.add(new WurstplusPair<BlockPos, Boolean>(second_pos, true));
 					}
-					else
+					else {
 						holes.add(new WurstplusPair<BlockPos, Boolean>(pos, false));
 						if (low_ceiling_hole) holes.add(new WurstplusPair<BlockPos, Boolean>(second_pos, false));
+					}
+
 				}
 
 			}
 		}
 	}
 
-	private BlockPos orientConv(int orient_count) {
+	private static BlockPos orientConv(int orient_count) {
 		BlockPos converted = null;
 
 		switch(orient_count) {
@@ -257,7 +259,7 @@ public class WurstplusHoleESP extends WurstplusHack {
 		return converted;
 	}
 
-	private int oppositeIntOrient(int orient_count) {
+	private static int oppositeIntOrient(int orient_count) {
 
 		int opposite = 0;
 
