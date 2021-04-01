@@ -56,6 +56,7 @@ public class WurstplusAutoCrystal extends WurstplusHack {
     WurstplusSetting hit_range = create("Hit Range", "CaHitRange", 5.2f, 1f, 6f);
     WurstplusSetting place_range = create("Place Range", "CaPlaceRange", 5.2f, 1f, 6f);
     WurstplusSetting hit_range_wall = create("Range Wall", "CaRangeWall", 4f, 1f, 6f);
+    WurstplusSetting enemy_range = create("Enemy Range", "CaEnemyRange", 10f, 1f, 15f);
 
     WurstplusSetting place_delay = create("Place Delay", "CaPlaceDelay", 0, 0, 10);
     WurstplusSetting break_delay = create("Break Delay", "CaBreakDelay", 2, 0, 10);
@@ -310,7 +311,7 @@ public class WurstplusAutoCrystal extends WurstplusHack {
 
                 if (WurstplusFriendUtil.isFriend(player.getName())) continue;
 
-                if (player.getDistance(mc.player) >= 11) continue; // stops lag
+                if (player.getDistance(mc.player) >= enemy_range.get_value(1)) continue; // stops lag
 
                 final EntityPlayer target = (EntityPlayer) player;
 
@@ -379,7 +380,7 @@ public class WurstplusAutoCrystal extends WurstplusHack {
 
                 if (player == mc.player || !(player instanceof EntityPlayer)) continue;
 
-                if (player.getDistance(mc.player) >= 11) continue;
+                if (player.getDistance(mc.player) >= enemy_range.get_value(1)) continue;
 
                 if (!WurstplusBlockUtil.rayTracePlaceCheck(block, this.raytrace.get_value(true))) {
                     continue;
